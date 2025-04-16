@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separate Slides Messages</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #e65c5c, #ff9966, #99cc66);
+            overflow: hidden;
+        }
+        
+        .popup {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            background-color: #fff8e6;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            z-index: 0;
+        }
+        
+        .popup.active {
+            opacity: 1;
+            transform: translateY(0);
+            z-index: 10;
+        }
+        
+        .message-text {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 18px;
+        }
+        
+        .next-btn {
+            background-color: #ff7e7e;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        
+        .next-btn:hover {
+            background-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 2s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Separate Popups -->
+    <div class="popup active" id="popup1">
+        <div class="message-text">
+						Happy 11th Monthsary Baby Chelsey Ko!!! Thank you for 11 months of joy, love, and kakupalan. I LOVE YOU SO MUCHH!!!!! ✨❤️❤️❤️✨✨
+        </div>
+        <button class="next-btn" data-next="popup2">Next</button>
+    </div>
+    
+    <div class="popup" id="popup2">
+        <div class="message-text">
+         Despite our challenges we faced, you were still there standing by my side. Fighting by my side and lastly, being my safe place and rest for my rough days🥺❤️✨
+        </div>
+        <button class="next-btn" data-next="popup3">Next</button>
+    </div>
+    
+    <div class="popup" id="popup3">
+        <div class="message-text">
+            Few more steps and magaaniversarry na tayo!! Naharap na natin ang biggest events sa buhay naten, your graduation, debut. I'm so proud of your achievements🥳
+        </div>
+        <button class="next-btn" data-next="popup4">Next</button>
+    </div>
+    
+    <div class="popup" id="popup4">
+        <div class="message-text">
+        Keep chasing your dreams and never give up, don't let negative people affect who you are! You are so perfect in any way. And always listen to tita, and never abandon your educations
+        </div>
+        <button class="next-btn" data-next="popup5">Next</button>
+    </div>
+    
+    <div class="popup" id="popup5">
+        <div class="message-text">
+    Thank you so much for accepting and loving a man like me chelsey, thank you sa pagsama saken kahit kahiya hiya ako, thank you du ka nagdoubt sa akin, i hope this gift is enough to show how lovable you are, how perfect you are. Happy Monthsary Baby and thank you for everything you've done for me!!! I LOVE YOUUU❤️❤️✨
+        </div><div id="button" class="next-btn" onclick="redirectToHome()">
+        <button class="next-btn" data-next="popup1">Finish</button>
+    </div>
+    <script>
+    function redirectToHome() {
+        window.location.href = "home.html";
+    }
+</script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popups = document.querySelectorAll('.popup');
+            const nextButtons = document.querySelectorAll('.next-btn');
+            
+            // Setup next buttons
+            nextButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Create heart effects
+                    createHeartEffects(button);
+                    
+                    // Get the current and next popup IDs
+                    const currentPopup = button.closest('.popup');
+                    const nextPopupId = button.getAttribute('data-next');
+                    const nextPopup = document.getElementById(nextPopupId);
+                    
+                    // Hide current popup
+                    currentPopup.classList.remove('active');
+                    
+                    // Show next popup after a small delay
+                    setTimeout(() => {
+                        nextPopup.classList.add('active');
+                    }, 300);
+                });
+            });
+            
+            function createHeartEffects(button) {
+                // Create multiple hearts
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '❤️';
+                        heart.classList.add('heart');
+                        heart.style.fontSize = `${Math.random() * 10 + 15}px`;
+                        
+                        // Position the heart relative to the button
+                        const buttonRect = button.getBoundingClientRect();
+                        const x = buttonRect.left + Math.random() * buttonRect.width;
+                        const y = buttonRect.top;
+                        
+                        heart.style.left = `${x}px`;
+                        heart.style.top = `${y}px`;
+                        
+                        document.body.appendChild(heart);
+                        
+                        // Remove the heart after animation completes
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 2000);
+                    }, i * 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

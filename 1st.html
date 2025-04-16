@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Messages</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ff3333, #ffcc99, #66cc66);
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 80%;
+      max-width: 400px;
+      height: 80%;
+      background-color: rgba(255, 235, 205, 0.8);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .popup {
+      padding: 15px 25px;
+      border-radius: 10px;
+      margin: 15px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease-out;
+    }
+    
+    .wife-message {
+      background-color: #ffe4c4;
+      color: #333;
+    }
+    
+    .hubby-message {
+      background-color: #ff9999;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="wifeMessage" class="popup wife-message">
+      Welcome, My Dear Wife Chelsey!
+    </div>
+    <div id="hubbyMessage" class="popup hubby-message"onclick="redirectToHome()">
+    Hello Hubby!
+</div>
+
+<script>
+    function redirectToHome() {
+        window.location.href = "2nd.html";
+    }
+</script>    
+
+  <script>
+    window.onload = function() {
+      // Show first popup
+      setTimeout(function() {
+        const wifeMessage = document.getElementById('wifeMessage');
+        wifeMessage.style.opacity = '1';
+        wifeMessage.style.transform = 'scale(1)';
+      }, 500);
+      
+      // Show second popup
+      setTimeout(function() {
+        const hubbyMessage = document.getElementById('hubbyMessage');
+        hubbyMessage.style.opacity = '1';
+        hubbyMessage.style.transform = 'scale(1)';
+      }, 2000);
+    };
+  </script>
+</body>
+</html>

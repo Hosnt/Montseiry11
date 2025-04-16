@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Monthsary Chelsey!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ff8aa7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.5s ease;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.5s ease;
+    }
+
+    .button-container {
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .continue-button {
+      background: linear-gradient(45deg, #e74c3c, #ff7eb3);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .continue-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(231, 76, 60, 0.6);
+    }
+
+    .continue-button:active {
+      transform: translateY(1px);
+    }
+
+    .continue-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .continue-button:hover::after {
+      transform: translateX(100%);
+    }
+
+    /* Hearts */
+    .heart {
+      position: absolute;
+      font-size: 30px;
+      color: rgba(255, 255, 255, 0.8);
+      animation: pulse 2s infinite;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Final Animation */
+    .love-burst {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,0,0,0.6) 0%, rgba(255,0,0,0) 70%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <div id="hearts-container"></div>
+  
+  <div class="love-burst" id="loveBurst"></div>
+  
+  <div class="container">
+    <h1 id="mainTitle">HAPPY MONTHSARY</h1>
+    <h2 id="subtitle">BABI CHELSEY!!</h2>
+    
+    <div class="button-container" id="buttonContainer">
+      <button class="continue-button" id="continueButton">Continue to Our Journey</button>
+    </div>
+  </div>
+
+  <script>
+    // Create a moderate number of hearts
+    function createHearts() {
+      const heartsContainer = document.getElementById('hearts-container');
+      // Just 10 hearts - a normal amount that won't cause lag
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        
+        // Position hearts at different places on the screen
+        heart.style.left = `${Math.random() * 80 + 10}%`;
+        heart.style.top = `${Math.random() * 80 + 10}%`;
+        
+        // Use a few different heart emojis
+        const heartTypes = ['❤️', '💖', '💕'];
+        heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+        
+        // Different animation delays
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        // Different appearance times
+        heart.style.transitionDelay = `${2 + Math.random() * 1.5}s`;
+        
+        heartsContainer.appendChild(heart);
+      }
+      
+      // Show all hearts after their delay
+      setTimeout(() => {
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(heart => {
+          heart.style.opacity = 1;
+        });
+      }, 2000);
+    }
+
+    // Simple animation sequence
+    window.addEventListener('load', () => {
+      const mainTitle = document.getElementById('mainTitle');
+      const subtitle = document.getElementById('subtitle');
+      const buttonContainer = document.getElementById('buttonContainer');
+      
+      // Create hearts
+      createHearts();
+      
+      // Animate main title
+      setTimeout(() => {
+        mainTitle.style.opacity = 1;
+        mainTitle.style.transform = 'scale(1)';
+      }, 500);
+      
+      // Animate subtitle after main title
+      setTimeout(() => {
+        subtitle.style.opacity = 1;
+        subtitle.style.transform = 'scale(1)';
+      }, 1000);
+      
+      // Show button after text animations
+      setTimeout(() => {
+        buttonContainer.style.opacity = 1;
+        buttonContainer.style.transform = 'translateY(0)';
+      }, 1800);
+      
+      // Set up button click
+      document.getElementById('continueButton').addEventListener('click', () => {
+        const loveBurst = document.getElementById('loveBurst');
+        loveBurst.style.opacity = 1;
+        
+        // Animate the burst
+        loveBurst.animate([
+          { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+          { transform: 'translate(-50%, -50%) scale(8)', opacity: 0 }
+        ], {
+          duration: 1000,
+          easing: 'ease-out',
+          fill: 'forwards'
+        });
+        
+        // Redirect after animation
+        setTimeout(() => {
+          window.location.href = '1st.html';
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>

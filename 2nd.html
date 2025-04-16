@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anniversary Messages</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ff3333, #ffcc99, #66cc66);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    
+    .container {
+      width: 80%;
+      max-width: 400px;
+      height: 80%;
+      background-color: rgba(255, 235, 205, 0.8);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .popup {
+      padding: 15px 25px;
+      border-radius: 10px;
+      margin: 15px;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .first-message {
+      background-color: #ffe4c4;
+      color: #333;
+      max-width: 80%;
+    }
+    
+    .second-message {
+      background-color: #ff9999;
+      color: #333;
+      max-width: 60%;
+    }
+    
+    /* Lovely theme effects */
+    .heart {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      background-color: rgba(255, 105, 180, 0.6);
+      transform: rotate(-45deg);
+      animation: float 4s ease-in-out infinite;
+      opacity: 0;
+    }
+    
+    .heart:before,
+    .heart:after {
+      content: "";
+      background-color: rgba(255, 105, 180, 0.6);
+      border-radius: 50%;
+      height: 20px;
+      width: 20px;
+      position: absolute;
+    }
+    
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+    
+    .heart:after {
+      top: 0;
+      left: 10px;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(-45deg) scale(1);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) rotate(-45deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+    
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: white;
+      box-shadow: 0 0 10px 2px gold;
+      opacity: 0;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+    
+    @keyframes twinkle {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="firstMessage" class="popup first-message">
+      Happy 11th Monthsary!<br>
+      Or Maybe<br>
+      MonthSEIry
+    </div>
+    <div id="secondMessage" class="popup second-message" onclick="redirectToHome()">
+    IHHH STAPH!!!
+</div>
+
+<script>
+    function redirectToHome() {
+        window.location.href = "home.html";
+    }
+</script>
+    <!-- Hearts will be added here by JavaScript -->
+  </div>
+
+  <script>
+    window.onload = function() {
+      // Create floating hearts
+      for (let i = 0; i < 10; i++) {
+        createHeart();
+      }
+      
+      // Create sparkles
+      for (let i = 0; i < 15; i++) {
+        createSparkle();
+      }
+      
+      // Show first popup with a bounce effect
+      setTimeout(function() {
+        const firstMessage = document.getElementById('firstMessage');
+        firstMessage.style.opacity = '1';
+        firstMessage.style.transform = 'scale(1)';
+        
+        // Add bounce animation
+        firstMessage.animate([
+          { transform: 'scale(1)' },
+          { transform: 'scale(1.05)' },
+          { transform: 'scale(1)' }
+        ], {
+          duration: 500,
+          iterations: 1,
+          delay: 300
+        });
+      }, 500);
+      
+      // Show second popup
+      setTimeout(function() {
+        const secondMessage = document.getElementById('secondMessage');
+        secondMessage.style.opacity = '1';
+        secondMessage.style.transform = 'scale(1)';
+        
+        // Add wobble animation
+        secondMessage.animate([
+          { transform: 'scale(1) rotate(0deg)' },
+          { transform: 'scale(1.03) rotate(-2deg)' },
+          { transform: 'scale(1.03) rotate(2deg)' },
+          { transform: 'scale(1) rotate(0deg)' }
+        ], {
+          duration: 600,
+          iterations: 1,
+          delay: 200
+        });
+      }, 2000);
+    };
+    
+    // Function to create floating hearts
+    function createHeart() {
+      const container = document.querySelector('.container');
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      
+      // Random positioning
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.bottom = '0';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      
+      container.appendChild(heart);
+    }
+    
+    // Function to create sparkles
+    function createSparkle() {
+      const container = document.querySelector('.container');
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      
+      // Random positioning
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 2 + 's';
+      
+      container.appendChild(sparkle);
+    }
+  </script>
+</body>
+</html>
